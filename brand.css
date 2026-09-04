@@ -95,6 +95,23 @@ a { color: var(--teal); }
 .site-nav a:hover { background: rgba(255,255,255,.22); }
 .site-nav a.cta { background: var(--gold); color: #23201b; border-color: var(--gold); }
 
+/* ── أرقامٌ في الصفحة الأولى ──
+   حقيقيّةٌ كلُّها: التنزيلاتُ من غيت هَب، والكتبُ من عدّ المكتبة. */
+.stats {
+  display: flex; gap: 14px; flex-wrap: wrap; margin: 28px 0 0;
+}
+.stat {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 22px; min-width: 150px; flex: 0 1 auto;
+}
+.stat[hidden] { display: none !important; }
+.stat b {
+  display: block; font-family: var(--display); font-weight: 700;
+  font-size: clamp(26px, 4vw, 34px); line-height: 1.2; color: var(--teal);
+  font-variant-numeric: tabular-nums;
+}
+.stat span { display: block; margin-top: 4px; font-size: 13.5px; color: var(--ink-2); }
+
 /* ── عناصر مشتركة ── */
 section { margin: 44px 0; }
 h2 { font-size: clamp(19px, 3vw, 24px); margin: 0 0 8px; }

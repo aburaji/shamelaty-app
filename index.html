@@ -41,6 +41,21 @@
     <a class="btn" href="./how.html#download">حمِّل البرنامج</a>
     <a class="btn ghost" href="./how.html">اقرأ طريقة الاستخدام</a>
   </p>
+
+  <div class="stats">
+    <div class="stat" id="dlStat" hidden>
+      <b id="dlCount">—</b>
+      <span>مرّة حُمِّل البرنامج</span>
+    </div>
+    <div class="stat">
+      <b>٨٤٧٧</b>
+      <span>كتابًا يُبحث فيها</span>
+    </div>
+    <div class="stat">
+      <b>٠</b>
+      <span>ريال — ولا اشتراك</span>
+    </div>
+  </div>
 </section>
 
 <section>
@@ -111,5 +126,28 @@
   </div>
 </footer>
 
+<script>
+/* عدّادُ التنزيلات: مجموعُ مرفقات كل الإصدارات من واجهة غيت هَب.
+   ويُخفى العدّادُ عند التعذّر أو عند الصفر — فرقمٌ خاطئ أسوأُ من لا رقم. */
+(function () {
+  var box = document.getElementById("dlStat");
+  var out = document.getElementById("dlCount");
+  if (!box || !out) return;
+  fetch("https://api.github.com/repos/aburaji/shamelaty-app/releases", {
+    headers: { accept: "application/vnd.github+json" }
+  })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (rels) {
+      var n = 0;
+      (rels || []).forEach(function (rel) {
+        (rel.assets || []).forEach(function (a) { n += a.download_count || 0; });
+      });
+      if (!n) return;
+      out.textContent = n.toLocaleString("ar-EG");
+      box.hidden = false;
+    })
+    .catch(function () { /* الصفحة كاملةٌ بدونه */ });
+})();
+</script>
 </body>
 </html>
