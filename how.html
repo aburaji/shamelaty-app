@@ -59,6 +59,9 @@
     <a class="btn gold" id="dl" href="https://github.com/aburaji/shamelaty-app/releases/latest/download/Shamelaty.exe">
       ⬇ حمِّل Shamelaty.exe
     </a>
+    <p class="ver">
+      النسخة الحالية <b id="verTag">v1.0.2</b> · صدرت في <span id="verDate">٤ سبتمبر ٢٠٢٦</span>
+    </p>
     <p class="meta">
       نحو ٩٢ ميغابايت. وإن لم يبدأ التحميل، افتح
       <a href="https://github.com/aburaji/shamelaty-app/releases/latest">صفحة الإصدارات</a>.
@@ -180,5 +183,26 @@
   </div>
 </footer>
 
+<script>
+/* رقمُ الإصدار وتاريخُه من غيت هَب. والمكتوبُ في الصفحة احتياطٌ يُقرأ عند
+   التعذّر — فلا يبقى المكانُ فارغًا ولا يُكتب فيه خطأ. */
+(function () {
+  var t = document.getElementById("verTag");
+  var d = document.getElementById("verDate");
+  if (!t || !d) return;
+  fetch("https://api.github.com/repos/aburaji/shamelaty-app/releases/latest", {
+    headers: { accept: "application/vnd.github+json" }
+  })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (rel) {
+      if (rel.tag_name) t.textContent = rel.tag_name;
+      var x = rel.published_at ? new Date(rel.published_at) : null;
+      if (x && !isNaN(x.getTime())) {
+        d.textContent = x.toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
+      }
+    })
+    .catch(function () { /* المكتوبُ في الصفحة يكفي */ });
+})();
+</script>
 </body>
 </html>

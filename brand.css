@@ -95,6 +95,16 @@ a { color: var(--teal); }
 .site-nav a:hover { background: rgba(255,255,255,.22); }
 .site-nav a.cta { background: var(--gold); color: #23201b; border-color: var(--gold); }
 
+/* رقمُ الإصدار تحت زرّ التحميل — خبرٌ لا دعوة، فيُهمَس ولا يُصاح. */
+.ver {
+  margin: 13px 0 0; font-size: 13.5px; color: var(--ink-3); line-height: 1.7;
+}
+.ver b {
+  font-family: var(--display); font-weight: 700; color: var(--ink-2);
+  font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate;
+  display: inline-block;
+}
+
 /* ── أرقامٌ في الصفحة الأولى ──
    حقيقيّةٌ كلُّها: التنزيلاتُ من غيت هَب، والكتبُ من عدّ المكتبة. */
 .stats {
